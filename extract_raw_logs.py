@@ -72,11 +72,15 @@ if __name__ == "__main__":
     else :
         print "Number of seconds should be between 1 and 59"
 
-    if delta == 0:
-        print "WARNING : No slice defined !! Final result could be truncated"
+    if delta == td():
+        delta += td(hours=1)
+        print "WARNING : No slice defined !! Final result could be truncated (using 1 hour as default)"
     
-    de=int(delta.total_seconds())
-    
+    if hasattr(delta, "total_seconds"): 
+        de = int(delta.total_seconds())
+    else: 
+        de = (delta.seconds + delta.days * 24 * 3600)
+ 
     # Working directory
     wd = "/ss1/usr/local/elm/tmp/" + args.d + "/"
     
