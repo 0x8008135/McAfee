@@ -24,7 +24,7 @@ def elm_search(f,s,e,d,w,l):
         check_dir(wd)
         print "/usr/local/bin/elmsearch wd=" + wd + " st=" + str(st) + " et=" + str(mt) + " nr=/%5E%2E%2A%24/e mr=/" + f + "/ mb=1024"
         l.write("/usr/local/bin/elmsearch wd=" + wd + " st=" + str(st) + " et=" + str(mt) + " nr=/%5E%2E%2A%24/e mr=/" + f + "/ mb=1024")
-        subprocess.call(["/usr/local/bin/elmsearch", "wd=" + wd, "st=" + str(st), "et=" + str(mt), "nr=/%2E%2E%2A%24/e", "mr=/" + f + "/", "mb=1024" ], stdout=l)
+        subprocess.call(["/usr/local/bin/elmsearch", "wd=" + wd, "st=" + str(st), "et=" + str(mt), "nr=/%5E%2E%2A%24/e", "mr=/" + f + "/", "mb=1024" ], stdout=l)
         cnt+=1
 
 
