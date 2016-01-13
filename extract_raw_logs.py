@@ -1,3 +1,7 @@
+#!/usr/bin/python
+
+#ELM_extractor, McAfee Raw Logs extractor
+
 from datetime import datetime, timedelta as td
 import argparse
 import os
@@ -41,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("-sm", action='store', dest="sm", type=int, default=0, help="Slice in minutes (stacks with sd,sh,ss)")
     parser.add_argument("-ss", action='store', dest="ss", type=int, default=0, help="Slice in seconds (stacks with sd,sh,sm)")
     args = parser.parse_args()
-	
+
     st=0
     et=0
 
@@ -75,15 +79,15 @@ if __name__ == "__main__":
     if delta == td():
         delta += td(hours=1)
         print "WARNING : No slice defined !! Final result could be truncated (using 1 hour as default)"
-    
-    if hasattr(delta, "total_seconds"): 
+
+    if hasattr(delta, "total_seconds"):
         de = int(delta.total_seconds())
-    else: 
+    else:
         de = (delta.seconds + delta.days * 24 * 3600)
- 
+
     # Working directory
-    wd = "/ss1/usr/local/elm/tmp/" + args.d + "/"
-    
+    wd = "/elm_storage/local/tmp/" + args.d + "/"
+
 	# Check if directory exists
     if not os.path.exists(wd):
         # Create directory
@@ -101,20 +105,20 @@ if __name__ == "__main__":
         else:
             # Do not remove the directory
             print "Directory will not be removed but content can be overwritten"
-    
+
     # Encode the regexp
     f_regex = ul.quote(args.mr)
-	
+
 	# Open logfile descriptor
     lf = open(args.l,"w")
-	
+
     elm_search(f_regex, st, et, de, wd, lf)
-    
+
     lf.close()
-    
+
     print "\n"
     print "\n"
-    print "Please review the log file (" + args.l + ") to see if your results where truncated or not..." 
+    print "Please review the log file (" + args.l + ") to see if your results where truncated or not..."
     print "\n"
     print "\n"
     print "To merge results :"
